@@ -28,9 +28,10 @@ func init() {
 	help := flag.Bool("h", false, "help")
 	flag.Parse()
 
-	handleConfig(*cfg)
 	handleVersion(*version)
 	handleHelp(*help)
+	handleConfig(*cfg)
+
 	g.InitRedisConnPool()
 	judge.InitHistoryBigMap()
 	sender.Init()
@@ -52,16 +53,16 @@ func handleVersion(displayVersion bool) {
 	}
 }
 
-func handleConfig(configFile string) {
-	err := g.Parse(configFile)
-	if err != nil {
-		log.Fatalln(err)
-	}
-}
-
 func handleHelp(displayHelp bool) {
 	if displayHelp {
 		flag.Usage()
 		os.Exit(0)
+	}
+}
+
+func handleConfig(configFile string) {
+	err := g.Parse(configFile)
+	if err != nil {
+		log.Fatalln(err)
 	}
 }

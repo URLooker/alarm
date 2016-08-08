@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"log"
+	"sync"
 
 	"github.com/toolkits/file"
 )
@@ -70,8 +71,8 @@ type SmtpConfig struct {
 }
 
 var (
-	File   string
-	Config *GlobalConfig
+	Config     *GlobalConfig
+	configLock = new(sync.RWMutex)
 )
 
 func Parse(cfg string) error {
@@ -83,10 +84,7 @@ func Parse(cfg string) error {
 		return fmt.Errorf("configuration file %s is not exists", cfg)
 	}
 
-	File = cfg
-
 	configContent, err := file.ToTrimString(cfg)
-
 	if err != nil {
 		return fmt.Errorf("read configuration file %s fail %s", cfg, err.Error())
 	}
@@ -97,6 +95,8 @@ func Parse(cfg string) error {
 		return fmt.Errorf("parse configuration file %s fail %s", cfg, err.Error())
 	}
 
+	configLock.Lock()
+	defer configLock.Unlock()
 	Config = &c
 
 	log.Println("load configuration file", cfg, "successfully")
