@@ -13,7 +13,6 @@ mkdir -p $GOPATH/src/github.com/urlooker
 cd $GOPATH/src/github.com/urlooker
 git clone https://github.com/URLooker/alarm.git
 cd alarm
-go get ./...
 ./control build
 ./control start
 ```
