@@ -25,6 +25,7 @@ func Judge(L *SafeLinkedList, item *model.ItemStatus, now int64) {
 		RespCode:   item.RespCode,
 		RespTime:   item.RespTime,
 		Result:     item.Result,
+		MonitorIdc: item.MonitorIdc,
 	}
 
 	historyData, isTriggered := compute(L, item, strategy)

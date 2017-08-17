@@ -61,31 +61,31 @@
 		},
 		{
 			"ImportPath": "github.com/urlooker/web/api",
-			"Rev": "b8c931dc502b9667ee9f54ec661ffd9f654d265a"
+			"Rev": "54a0c3eddeac573da66b9925a4bb5a5b77dbc1c9"
 		},
 		{
 			"ImportPath": "github.com/urlooker/web/backend",
-			"Rev": "b8c931dc502b9667ee9f54ec661ffd9f654d265a"
+			"Rev": "54a0c3eddeac573da66b9925a4bb5a5b77dbc1c9"
 		},
 		{
 			"ImportPath": "github.com/urlooker/web/g",
-			"Rev": "b8c931dc502b9667ee9f54ec661ffd9f654d265a"
+			"Rev": "54a0c3eddeac573da66b9925a4bb5a5b77dbc1c9"
 		},
 		{
 			"ImportPath": "github.com/urlooker/web/model",
-			"Rev": "b8c931dc502b9667ee9f54ec661ffd9f654d265a"
+			"Rev": "54a0c3eddeac573da66b9925a4bb5a5b77dbc1c9"
 		},
 		{
 			"ImportPath": "github.com/urlooker/web/sender",
-			"Rev": "b8c931dc502b9667ee9f54ec661ffd9f654d265a"
+			"Rev": "54a0c3eddeac573da66b9925a4bb5a5b77dbc1c9"
 		},
 		{
 			"ImportPath": "github.com/urlooker/web/store",
-			"Rev": "b8c931dc502b9667ee9f54ec661ffd9f654d265a"
+			"Rev": "54a0c3eddeac573da66b9925a4bb5a5b77dbc1c9"
 		},
 		{
 			"ImportPath": "github.com/urlooker/web/utils",
-			"Rev": "b8c931dc502b9667ee9f54ec661ffd9f654d265a"
+			"Rev": "54a0c3eddeac573da66b9925a4bb5a5b77dbc1c9"
 		},
 		{
 			"ImportPath": "stathat.com/c/consistent",

@@ -11,13 +11,14 @@ import (
 )
 
 type ItemStatus struct {
-	Id       int64  `json:"id"`
-	Sid      int64  `json:"sid"`
-	Ip       string `json:"ip"`
-	RespTime int    `json:"resp_time"`
-	RespCode string `json:"resp_code"`
-	PushTime int64  `json:"push_time"`
-	Result   int64  `json:"result"`
+	Id         int64  `json:"id"`
+	Sid        int64  `json:"sid"`
+	Ip         string `json:"ip"`
+	MonitorIdc string `json:"monitor_idc"`
+	RespTime   int    `json:"resp_time"`
+	RespCode   string `json:"resp_code"`
+	PushTime   int64  `json:"push_time"`
+	Result     int64  `json:"result"`
 }
 
 var ItemStatusRepo *ItemStatus
@@ -39,7 +40,7 @@ func (this *ItemStatus) GetByIpAndSid(ip string, sid int64) ([]*ItemStatus, erro
 
 func (this *ItemStatus) PK() string {
 	h := md5.New()
-	io.WriteString(h, fmt.Sprintf("%s/%s", this.Sid, this.Ip))
+	io.WriteString(h, fmt.Sprintf("%s/%s/%s", this.Sid, this.Ip, this.MonitorIdc))
 
 	return fmt.Sprintf("%x", h.Sum(nil))
 }
