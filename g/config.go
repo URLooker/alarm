@@ -34,6 +34,7 @@ type RpcConfig struct {
 
 type RedisConfig struct {
 	Dsn          string `json:"dsn"`
+	Db           int    `json.db`
 	MaxIdle      int    `json:"maxIdle"`
 	ConnTimeout  int    `json:"connTimeout"`
 	ReadTimeout  int    `json:"readTimeout"`
