@@ -4,6 +4,7 @@ import "fmt"
 
 type Event struct {
 	Id          string `json:"id"`
+	EventId     string `json:"event_id"`
 	Status      string `json:"status"`
 	Url         string `json:"url"`
 	Ip          string `json:"ip"`

@@ -5,10 +5,11 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/urlooker/web/model"
+
 	"github.com/urlooker/alarm/backend"
 	"github.com/urlooker/alarm/cache"
 	"github.com/urlooker/alarm/g"
-	"github.com/urlooker/web/model"
 )
 
 func Judge(L *SafeLinkedList, item *model.ItemStatus, now int64) {
@@ -17,7 +18,7 @@ func Judge(L *SafeLinkedList, item *model.ItemStatus, now int64) {
 		return
 	}
 	event := &model.Event{
-		Id:         fmt.Sprintf("e_%d_%s", item.Id, item.PK()),
+		EventId:    fmt.Sprintf("e_%d_%s", item.Id, item.PK()),
 		Url:        strategy.Url,
 		StrategyId: item.Sid,
 		Ip:         item.Ip,
@@ -54,7 +55,7 @@ func compute(L *SafeLinkedList, item *model.ItemStatus, strategy model.Strategy)
 }
 
 func sendEventIfNeed(historyData []*HistoryData, isTriggered bool, now int64, event *model.Event, maxStep int) {
-	lastEvent, exists := cache.LastEvents.Get(event.Id)
+	lastEvent, exists := cache.LastEvents.Get(event.EventId)
 	if isTriggered {
 		event.Status = "PROBLEM"
 		if !exists || lastEvent.Status[0] == 'O' {
@@ -99,7 +100,7 @@ func sendEventIfNeed(historyData []*HistoryData, isTriggered bool, now int64, ev
 }
 
 func sendEvent(event *model.Event) {
-	cache.LastEvents.Set(event.Id, event)
+	cache.LastEvents.Set(event.EventId, event)
 	saveEvent(event)
 
 	bs, err := json.Marshal(event)
