@@ -17,6 +17,9 @@ cd alarm
 ./control start
 ```
 
+## 发送短信
+编辑 script/send.sms.sh 适配公司的短信网关
+
 ## Configuration
 
 ```
@@ -52,7 +55,6 @@ cd alarm
         "sms": 10,
         "mail": 50
     },
-    "sms": "",
     "smtp": {
         "addr": "mail.addr:25",
         "username": "mail@mail.com",

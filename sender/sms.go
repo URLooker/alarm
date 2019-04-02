@@ -2,10 +2,14 @@ package sender
 
 import (
 	"log"
+	"os/exec"
+	"path"
 	"strings"
+	"syscall"
 	"time"
 
-	"github.com/toolkits/net/httplib"
+	"github.com/toolkits/file"
+	"github.com/toolkits/sys"
 
 	"github.com/urlooker/alarm/g"
 )
@@ -32,29 +36,27 @@ func SendSmsList(L []*g.Sms) {
 		log.Println("SmsCount", len(toArr))
 
 		SmsWorkerChan <- 1
-		go SendSms(sms)
+		go sendSms(sms.Tos, sms.Content)
 	}
 }
 
-func SendSms(sms *g.Sms) {
+func sendSms(phone string, sms string) {
 	defer func() {
 		<-SmsWorkerChan
 	}()
 
-	url := g.Config.Sms
-	r := httplib.Post(url).SetTimeout(5*time.Second, 2*time.Minute)
-	tos := strings.Replace(sms.Tos, "+86", "", -1)
-	r.Param("tos", tos)
-	r.Param("content", sms.Content)
-	resp, err := r.String()
-	if err != nil {
-		log.Println(err)
-		//SendMailToMaintainer("sender sms provider error", err.Error())
+	sms_shell := path.Join(file.SelfDir(), "script", "send.sms.sh")
+	if !file.IsExist(sms_shell) {
+		log.Printf("%s not found", sms_shell)
+		return
 	}
 
-	if g.Config.Debug {
-		log.Println("==sms==>>>>", sms)
-		log.Println("<<<<==sms==", resp)
-	}
+	cmd := exec.Command(sms_shell, phone, "'"+sms+"'")
+	cmd.SysProcAttr = &syscall.SysProcAttr{Setpgid: true}
+	cmd.Start()
+	err, isTimeout := sys.CmdRunWithTimeout(cmd, time.Second*10)
+	log.Printf("%s %s %s", sms_shell, phone, sms)
+	log.Printf("err: %v, isTimeout: %v", err, isTimeout)
 
+	return
 }

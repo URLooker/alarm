@@ -19,7 +19,6 @@ type GlobalConfig struct {
 	Mysql  *MysqlConfig  `json:"mysql"`
 	Worker *WorkerConfig `json:"worker"`
 	Smtp   *SmtpConfig   `json:"smtp"`
-	Sms    string        `json:"sms"`
 }
 
 type MysqlConfig struct {
